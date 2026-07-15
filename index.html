@@ -1,10 +1,11 @@
+
 <!doctype html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SAFETIQUE | Safety, Designed for Your Brand.</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Montserrat:wght@500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-warm-ivory: #FAF6EE;
@@ -19,7 +20,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         body { 
-            font-family: 'Noto Sans KR', 'Montserrat', sans-serif; 
+            font-family: 'Inter', 'Montserrat', sans-serif; 
             background-color: var(--bg-warm-ivory); 
             color: var(--text-charcoal); 
             line-height: 1.7; 
@@ -33,13 +34,11 @@
             background-color: var(--text-charcoal);
             z-index: 9999;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            /* 2.5초 대기 후 화면이 위로 걷힘 */
             animation: slideUp 1.2s cubic-bezier(0.7, 0, 0.3, 1) 2.5s forwards;
         }
         .splash-logo img {
-            height: 120px;
-            /* 얇은 선 로고를 하얗고 굵게 보이도록 강제 필터 적용 */
-            filter: brightness(0) invert(1) drop-shadow(1px 1px 0 #fff) drop-shadow(-1px -1px 0 #fff);
+            height: 140px; 
+            filter: brightness(0) invert(1);
             opacity: 0;
             animation: pulseFade 1.5s cubic-bezier(0.4, 0, 0.2, 1) 0.5s forwards;
         }
@@ -81,11 +80,10 @@
 
         .image-placeholder { 
             background-color: #F3EDE2; border-radius: 16px; display: flex; 
-            align-items: center; justify-content: center; color: var(--text-gray); font-size: 0.9rem;
+            align-items: center; justify-content: center; flex-direction: column; color: var(--text-gray); font-size: 0.9rem;
             border: 1px dashed #DDD4C4; min-height: 240px; width: 100%; overflow: hidden;
             position: relative;
         }
-        /* 이미지 전환 효과 (호버 시 약간의 줌인) */
         .image-placeholder:hover { background-color: #EBE1D0; transition: all 0.4s ease; }
 
         .badge {
@@ -130,7 +128,7 @@
         }
         .hero-bg {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url('bg.jpg'); /* 수정 완료: bg.jpg 정상 적용 */
+            background-image: url('bg.jpg');
             background-size: cover;
             background-position: center; background-attachment: fixed; z-index: -2;
             animation: bgZoom 20s infinite alternate ease-in-out;
@@ -143,7 +141,6 @@
         }
         .hero-content { color: #fff; z-index: 1; padding: 0 20px; }
         
-        /* 인트로 스플래시 화면이 끝난 후 순차적으로 텍스트가 뜨는 애니메이션 */
         .hero-content .sub-eng { font-size: 1.2rem; color: var(--orange-start); font-weight: 700; margin-bottom: 12px; letter-spacing: 1px; opacity: 0; animation: fadeInUp 1s ease 3.0s forwards; }
         .hero-content h1 { font-family: 'Montserrat', sans-serif; font-size: 4.5rem; font-weight: 800; margin-bottom: 24px; letter-spacing: 2px; opacity: 0; animation: fadeInUp 1s ease 3.2s forwards; }
         .hero-content p { font-size: 1.5rem; font-weight: 400; opacity: 0; animation: fadeInUp 1s ease 3.4s forwards; }
@@ -153,7 +150,7 @@
             100% { opacity: 1; transform: translateY(0); }
         }
 
-        /* 스크롤 등장 애니메이션 및 지연(Delay) 효과 */
+        /* 스크롤 등장 애니메이션 */
         .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
         .delay-1 { transition-delay: 0.1s; }
@@ -196,8 +193,42 @@
         .footer-container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; max-width: 1140px; margin: 0 auto; padding: 0 24px; }
         .footer-brand { display: flex; align-items: center; gap: 16px; }
 
+        /* =============== AI Solution 전용 스타일 추가 =============== */
+        .ai-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start;
+        }
+        .ai-grid h3 {
+            font-size: 1.2rem; color: var(--text-charcoal); margin-bottom: 16px; 
+        }
+        .upload-area {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            border: 2px dashed #DDD4C4; border-radius: 16px; padding: 40px 20px;
+            background-color: var(--bg-warm-ivory); cursor: pointer; transition: all 0.3s;
+            min-height: 250px; text-align: center; font-size: 1rem; color: var(--text-gray);
+            position: relative; overflow: hidden;
+        }
+        .upload-area:hover {
+            border-color: var(--orange-start); background-color: #FDE8D7;
+        }
+        #previewImage, #generatedImage {
+            max-width: 100%; max-height: 300px; display: none; border-radius: 12px; object-fit: contain;
+        }
+        button {
+            background: linear-gradient(135deg, var(--orange-start), var(--orange-end));
+            color: white; border: none; padding: 14px 28px; border-radius: 10px; font-weight: 600;
+            cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; font-size: 1rem;
+            width: 100%; display: inline-block; text-align: center; font-family: inherit;
+        }
+        button:hover:not(:disabled) {
+            transform: translateY(-2px); box-shadow: 0 8px 16px rgba(249, 115, 22, 0.25);
+        }
+        button:disabled {
+            background: #EFEAE2; color: #999; cursor: not-allowed; box-shadow: none; transform: none;
+        }
+
         @media (max-width: 992px) {
             .solution-grid { grid-template-columns: 1fr; }
+            .ai-grid { grid-template-columns: 1fr; } /* 모바일 세로 배치 */
             nav { display: none; }
             .hero-content h1 { font-size: 3rem; }
         }
@@ -205,66 +236,98 @@
 </head>
 <body id="home">
 
+    <!-- 1. 오프닝 스플래시 인트로 화면 -->
     <div class="splash-screen">
         <div class="splash-logo">
-            <span style="color:#fff; font-size:2rem; font-weight:800; font-family:'Montserrat';">S</span>
+            <img src="logo.png" alt="SAFETIQUE Logo">
         </div>
         <div class="splash-text">SAFETIQUE</div>
     </div>
 
+    <!-- 상단 헤더 네비게이션 -->
     <header>
         <a href="#home" class="logo">SAFETIQUE</a>
         <nav>
-            <a href="#problems">Problems</a>
-            <a href="#solutions">Solutions</a>
-            <a href="#process">Process</a>
-            <a href="#cases">Cases</a>
+            <a href="#overview">Overview</a>
+            <a href="#problems">Problem</a>
+            <a href="#solutions">Solution</a>
+            <a href="#ai-solution">AI Solution</a>
+            <a href="#target-market">Market</a>
         </nav>
     </header>
 
+    <!-- 히어로 배너 섹션 -->
     <section class="hero">
         <div class="hero-bg"></div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
-            <p class="sub-eng">SAFETY, DESIGNED FOR YOUR BRAND</p>
+            <p class="sub-eng">SAFETY, NATURALLY BLENDED INTO EVERY SPACE</p>
             <h1>SAFETIQUE</h1>
-            <p>브랜드의 정체성을 담은 프리미엄 안전 디자인 솔루션</p>
+            <p>A brand-customized safety object that keeps fire extinguishers visible, accessible, and aligned with premium interiors.</p>
         </div>
     </section>
 
-    <section id="problems" class="section">
+    <section id="overview" class="section">
         <div class="container text-center">
-            <h2 class="section-title reveal">기존 안전용품의 페인 포인트</h2>
-            <p class="section-subtitle reveal">우리는 일상과 브랜드 속에서 간과되던 안전 디자인의 한계를 개선합니다.</p>
+            <span class="badge reveal">SAFETY + BOUTIQUE</span>
+            <h2 class="section-title reveal">Safety Equipment Reimagined as a Brand Object</h2>
+            <p class="section-subtitle reveal">SAFETIQUE transforms fire extinguishers from hidden necessities into visible safety objects that support interior design, customer trust, and emergency readiness at the same time.</p>
             
             <div class="grid-3">
-                <div class="card problem-card reveal delay-1">
-                    <h3>투박한 일반 디자인</h3>
-                    <p>기존의 안전 용품들은 기능에만 치중하여 브랜드 고유의 감성이나 인테리어 무드를 해치기 일쑤였습니다.</p>
+                <div class="card reveal delay-1">
+                    <span class="badge">Before</span>
+                    <h3>Hidden Necessity</h3>
+                    <p>Fire extinguishers are essential, but in customer-facing spaces they are often pushed into corners, covered, or visually disconnected from the atmosphere.</p>
                 </div>
-                <div class="card problem-card reveal delay-2">
-                    <h3>낮은 일상 활용성</h3>
-                    <p>보관하기 급급해 보이지 않는 곳에 숨겨두어, 정작 긴급한 상황이 발생했을 때 빠르게 찾기 어렵습니다.</p>
+                <div class="card reveal delay-2">
+                    <span class="badge">SAFETIQUE</span>
+                    <h3>Open Safety Object</h3>
+                    <p>We keep the extinguisher easy to recognize and use while surrounding it with a brand-aligned exterior panel and customer touchpoints.</p>
                 </div>
-                <div class="card problem-card reveal delay-3">
-                    <h3>브랜드 가치 단절</h3>
-                    <p>고객 접점 공간이나 웰컴 키트 등에서 전체 브랜드 톤앤매너와의 통일성을 유지하기 어렵습니다.</p>
+                <div class="card reveal delay-3">
+                    <span class="badge">After</span>
+                    <h3>Natural Recognition</h3>
+                    <p>Customers notice safety more naturally, operators access equipment faster, and the space maintains its intended design language.</p>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- 문제 제기 섹션 -->
+    <section id="problems" class="section">
+        <div class="container text-center">
+            <h2 class="section-title reveal">Four Key Problems SAFETIQUE Addresses</h2>
+            <p class="section-subtitle reveal">The real issue is not that safety equipment does not exist. It is that people do not notice it, remember it, or access it quickly when it matters.</p>
+            
+            <div class="grid-3">
+                <div class="card problem-card reveal delay-1">
+                    <h3>Interior Conflict</h3>
+                    <p>The red color and industrial appearance of fire extinguishers often clash with cafes, hotels, galleries, showrooms, and other carefully designed spaces.</p>
+                </div>
+                <div class="card problem-card reveal delay-2">
+                    <h3>Recognition Gap</h3>
+                    <p>When equipment is placed out of sight, customers and operators may not know where it is located, reducing immediate usability in an emergency.</p>
+                </div>
+                <div class="card problem-card reveal delay-3">
+                    <h3>Weak Safety Trust</h3>
+                    <p>Dusty, hidden, or neglected equipment can make a space feel poorly managed and weaken the safety trust customers have in the brand.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 솔루션 섹션 -->
     <section id="solutions" class="section">
         <div class="container">
             <div class="solution-grid">
                 <div class="reveal">
                     <span class="badge">OUR SOLUTION</span>
-                    <h2 class="section-title">브랜드 맞춤형<br>안전 솔루션</h2>
-                    <p class="section-subtitle" style="margin-bottom: 24px;">SAFETIQUE는 안전 기준을 완벽히 충족하면서도 브랜드 정체성에 자연스럽게 녹아드는 프리미엄 커스텀 디자인을 제공합니다.</p>
+                    <h2 class="section-title">Not a Cover.<br>A Safety Object.</h2>
+                    <p class="section-subtitle" style="margin-bottom: 24px;">SAFETIQUE is designed to preserve emergency accessibility while turning safety equipment into a visual asset that belongs in the space.</p>
                     <div class="market-tags">
-                        <span class="tag">#브랜드디자인</span>
-                        <span class="tag">#안전용품커스텀</span>
-                        <span class="tag">#공간톤앤매너</span>
+                        <span class="tag">#BrandDesign</span>
+                        <span class="tag">#OpenAccess</span>
+                        <span class="tag">#SafetyObject</span>
                     </div>
                 </div>
                 
@@ -272,15 +335,22 @@
                     <div class="solution-item reveal delay-1">
                         <div class="solution-icon">01</div>
                         <div class="solution-content">
-                            <h4>Curation & Matching</h4>
-                            <p>브랜드 이미지와 공간 인테리어에 최적화된 고급 컬러 및 소재 매칭 프로세스를 거칩니다.</p>
+                            <h4>Open Access Panel</h4>
+                            <p>The structure does not block the extinguisher body, handle, hose, or pressure gauge, keeping emergency use simple and immediate.</p>
                         </div>
                     </div>
                     <div class="solution-item reveal delay-2">
                         <div class="solution-icon">02</div>
                         <div class="solution-content">
-                            <h4>Premium Quality</h4>
-                            <p>타협 없는 안전 인증 규격을 기본 바탕으로 하여, 시각적 심미성과 신뢰성을 동시에 확보합니다.</p>
+                            <h4>Brand-Matched Exterior</h4>
+                            <p>Colors, materials, and object forms are curated to fit each interior concept without making safety feel visually intrusive.</p>
+                        </div>
+                    </div>
+                    <div class="solution-item reveal delay-3">
+                        <div class="solution-icon">03</div>
+                        <div class="solution-content">
+                            <h4>QR Customer Touchpoint</h4>
+                            <p>A QR area can connect to reviews, Wi-Fi, brand events, or safety guidance, helping customers naturally remember the equipment location.</p>
                         </div>
                     </div>
                 </div>
@@ -288,64 +358,125 @@
         </div>
     </section>
 
+    <!-- AI 디자인 솔루션 섹션 (수정 반영) -->
+    <section id="ai-solution" class="section">
+        <div class="container">
+            <div class="text-center reveal">
+                <span class="badge">AI DESIGNER</span>
+                <h2 class="section-title">Create Your Own SAFETIQUE Design</h2>
+                <p class="section-subtitle">Upload a fire extinguisher photo and let AI create a brand-friendly design.</p>
+            </div>
+            
+            <div class="card reveal">
+                <div class="ai-grid">
+                    <div class="left-panel">
+                        <h3>① Upload Image</h3>
+                        <label class="upload-area" for="imageInput">
+                            <div id="uploadText">
+                                📤<br><br>Click or Drop Image Here
+                            </div>
+                            <img id="previewImage"/>
+                        </label>
+                        <input type="file" id="imageInput" accept="image/*" hidden>
+                        <br><br>
+                        <button id="analyzeBtn">Analyze Image</button>
+                    </div>
+                    
+                    <div class="right-panel">
+                        <h3>② AI Analysis</h3>
+                        <div id="analysisResult">
+                            <p style="color:#999">No analysis yet.</p>
+                        </div>
+                        <hr style="margin:30px 0; border:none; border-top:1px solid var(--border-color);">
+                        
+                        <h3>③ Recommended Styles</h3>
+                        <div id="styleButtons"></div>
+                        <hr style="margin:30px 0; border:none; border-top:1px solid var(--border-color);">
+                        
+                        <button id="generateBtn" disabled>Generate Design</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card reveal" style="margin-top:40px;">
+                <h3 style="margin-bottom:20px;">Generated Design</h3>
+                <div class="image-placeholder" id="generatedArea">
+                    <p style="color:#999">Generated image will appear here.</p>
+                    <img id="generatedImage"/>
+                </div>
+                <br>
+                <a id="downloadBtn" download="SafetyQ_Design.png" style="display:none; text-decoration:none;">
+                    <button style="width: auto; padding: 12px 36px; display: block; margin: 0 auto;">Download</button>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 프로세스 섹션 -->
     <section id="process" class="section">
         <div class="container text-center">
-            <h2 class="section-title reveal">진행 프로세스</h2>
-            <p class="section-subtitle reveal">기획부터 납품까지 유기적이고 체계적인 단계를 거쳐 완성도 높은 결과물을 선보입니다.</p>
+            <h2 class="section-title reveal">Cafe MVP Process</h2>
+            <p class="section-subtitle reveal">Cafes are our first validation market because decisions are fast, visual experiments are easy, and customer feedback can be collected directly.</p>
             
             <div class="process-grid">
                 <div class="process-card reveal delay-1">
                     <div class="process-num">01</div>
-                    <h4>상담 및 분석</h4>
+                    <h4>Proposal & Concept</h4>
                 </div>
                 <div class="process-card reveal delay-2">
                     <div class="process-num">02</div>
-                    <h4>디자인 컨셉</h4>
+                    <h4>Object Prototype</h4>
                 </div>
                 <div class="process-card reveal delay-3">
                     <div class="process-num">03</div>
-                    <h4>샘플 제작</h4>
+                    <h4>Real Installation</h4>
                 </div>
                 <div class="process-card reveal delay-4">
                     <div class="process-num">04</div>
-                    <h4>본 생산 및 납품</h4>
+                    <h4>Behavior Validation</h4>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="cases" class="section">
+    <!-- 케이스스터디 및 스탯 섹션 -->
+    <section id="target-market" class="section">
         <div class="container">
             <div class="case-container reveal">
                 <div class="before-after-grid">
                     <div>
-                        <div class="ba-title">BEFORE (기존 안전 용품)</div>
-                        <div class="image-placeholder">투박하고 이질적인 기존 비주얼</div>
+                        <div class="ba-title">ENTRY MARKET</div>
+                        <div class="image-placeholder">Cafes, dessert shops, and kids cafes for fast MVP testing and portfolio building</div>
                     </div>
                     <div>
-                        <div class="ba-title">AFTER (SAFETIQUE 적용)</div>
-                        <div class="image-placeholder" style="color:var(--orange-start); font-weight:700;">공간과 브랜드에 녹아든 디자인</div>
+                        <div class="ba-title">PREMIUM VISION</div>
+                        <div class="image-placeholder" style="color:var(--orange-start); font-weight:700;">Hotels, public institutions, galleries, and flagship brand spaces</div>
                     </div>
                 </div>
                 
                 <div class="feedback-stats">
                     <div class="stat-item">
-                        <div class="num">98%</div>
-                        <div class="label">브랜드 만족도</div>
+                        <div class="num">01</div>
+                        <div class="label">Cafe MVP</div>
                     </div>
                     <div class="stat-item">
-                        <div class="num">4.9</div>
-                        <div class="label">고객 파트너 평점</div>
+                        <div class="num">02</div>
+                        <div class="label">Public Credibility</div>
                     </div>
                     <div class="stat-item">
-                        <div class="num">150+</div>
-                        <div class="label">협업 파트너사</div>
+                        <div class="num">03</div>
+                        <div class="label">Multi-Installation B2B</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="num">04</div>
+                        <div class="label">Premium Brand Showrooms</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- 푸터 섹션 -->
     <footer>
         <div class="footer-container">
             <div class="footer-brand">
@@ -358,6 +489,7 @@
         </div>
     </footer>
 
+    <!-- 동적 이펙트를 위한 자바스크립트 추가 -->
     <script>
         // 1. 헤더 스크롤 시 백그라운드 블러 및 색상 변경
         window.addEventListener('scroll', () => {
@@ -381,12 +513,148 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
-                    observer.unobserve(entry.target); // 한 번 등장한 요소는 감시 해제
+                    observer.unobserve(entry.target); 
                 }
             });
         }, observerOptions);
 
         revealElements.forEach(el => observer.observe(el));
+
+        // 3. AI Test Modal (기존 코드)
+        (() => {
+            const endpoint = 'http://localhost:3000/api/test-ai';
+            const button = document.createElement('button');
+            const overlay = document.createElement('div');
+            const modal = document.createElement('div');
+            const header = document.createElement('div');
+            const title = document.createElement('strong');
+            const close = document.createElement('button');
+            const message = document.createElement('p');
+
+            button.type = 'button';
+            button.textContent = 'Test AI';
+            Object.assign(button.style, {
+                position: 'fixed',
+                right: '14px',
+                bottom: '14px',
+                zIndex: '999',
+                padding: '6px 9px',
+                border: '1px solid rgba(31,31,31,0.18)',
+                borderRadius: '6px',
+                background: 'rgba(255,255,255,0.86)',
+                color: '#1F1F1F',
+                font: '500 12px/1.2 Arial, sans-serif',
+                cursor: 'pointer',
+                opacity: '0.72',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
+                width: 'auto'
+            });
+
+            overlay.setAttribute('role', 'dialog');
+            overlay.setAttribute('aria-modal', 'true');
+            Object.assign(overlay.style, {
+                display: 'none',
+                position: 'fixed',
+                inset: '0',
+                zIndex: '10000',
+                alignItems: 'flex-end',
+                justifyContent: 'flex-end',
+                padding: '20px',
+                background: 'rgba(0,0,0,0.16)'
+            });
+
+            Object.assign(modal.style, {
+                width: 'min(300px, calc(100vw - 40px))',
+                padding: '16px',
+                borderRadius: '8px',
+                background: '#fff',
+                color: '#1F1F1F',
+                boxShadow: '0 12px 30px rgba(0,0,0,0.2)',
+                font: '400 14px/1.5 Arial, sans-serif'
+            });
+
+            Object.assign(header.style, {
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                gap: '12px',
+                marginBottom: '10px'
+            });
+
+            title.textContent = 'AI Test';
+            close.type = 'button';
+            close.textContent = 'x';
+            Object.assign(close.style, {
+                border: '0',
+                background: 'transparent',
+                color: '#66615A',
+                font: '700 14px/1 Arial, sans-serif',
+                cursor: 'pointer',
+                padding: '0',
+                width: 'auto',
+                boxShadow: 'none'
+            });
+
+            Object.assign(message.style, {
+                margin: '0',
+                color: '#1F1F1F',
+                wordBreak: 'break-word'
+            });
+
+            header.append(title, close);
+            modal.append(header, message);
+            overlay.append(modal);
+            document.body.append(button, overlay);
+
+            const showModal = (text, isError = false) => {
+                message.textContent = text;
+                message.style.color = isError ? '#B42318' : '#1F1F1F';
+                overlay.style.display = 'flex';
+            };
+
+            const hideModal = () => {
+                overlay.style.display = 'none';
+            };
+
+            close.addEventListener('click', hideModal);
+            overlay.addEventListener('click', (event) => {
+                if (event.target === overlay) hideModal();
+            });
+
+            button.addEventListener('click', async () => {
+                const controller = new AbortController();
+                const timeout = window.setTimeout(() => controller.abort(), 3000);
+
+                button.disabled = true;
+                button.textContent = 'Testing...';
+                showModal('Contacting OpenAI...');
+
+                try {
+                    const response = await fetch(endpoint, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: '{}',
+                        signal: controller.signal
+                    });
+                    const data = await response.json().catch(() => ({}));
+
+                    if (!response.ok) {
+                        throw new Error(data.error || 'OpenAI test failed. Please check the server logs.');
+                    }
+
+                    showModal(data.answer || 'No response returned.');
+                } catch (error) {
+                    const message = error.name === 'AbortError'
+                        ? 'OpenAI test timed out. Please try again.'
+                        : error.message;
+                    showModal(message, true);
+                } finally {
+                    window.clearTimeout(timeout);
+                    button.disabled = false;
+                    button.textContent = 'Test AI';
+                }
+            });
+        })();
     </script>
 </body>
 </html>
